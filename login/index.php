@@ -1,3 +1,59 @@
+<?php
+
+    /*
+     * ERROR TYPES
+     *
+     * 1 - invalid credentials
+     * 2 - user does not exist
+     *
+     * */
+    require "../helper/helper.php";
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $username = clean($_POST['username']);
+        $password = clean($_POST['password']);
+        performLogin($username,$password);
+    }
+
+    function performLogin($username,$password){
+        if(isCredentialsCorrect($username,$password)){
+            session_start();
+            $db_username = escape($username);
+            $sql = "SELECT role FROM users WHERE username = '{$db_username}'";
+            $result = query($sql);
+            confirm($result);
+            $row = fetch_array($result);
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $row['role'];
+            redirect("../index.php");
+        }else{
+            $sql = "SELECT * FROM users WHERE username = '{$db_username}'";
+            $result = query($sql);
+            confirm($result);
+            if(count_rows($result) == 0){
+                redirect("index.php?error=1");
+            }else{
+                redirect("index.php?error=2");
+            }
+        }
+    }
+
+    function isCredentialsCorrect($username,$password){
+        $f_username = escape($username);
+        $f_password = escape($password);
+
+        $sql = "SELECT username,password FROM users WHERE username='{$f_username}'";
+        $result = query($sql);
+        confirm($result);
+        if(count_rows($result) > 0){
+            $row = fetch_array($result);
+            $res_password = $row['password'];
+            return $res_password == $f_password;
+        }
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,10 +84,6 @@
             <a class="nav-link" href="#">Register</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-        </form>
       </div>
     </nav>
 
@@ -42,7 +94,24 @@
                     <div class="card-block">
                         <h4 class="card-title">OpenMarket Login</h4>
                         <div class="login-forms">
-                            <form action="" >
+                            <?php
+                                if(isset($_GET['error'])){
+                                    switch($_GET['error']){
+                                        case 1:
+                                            echo "<div class=\"alert alert-danger\">
+                                                  <strong>Failed to login!</strong> username or password is incorrect.
+                                                 </div>";
+                                            break;
+                                        case 2:
+                                            echo "<div class=\"alert alert-danger\">
+                                                  <strong>Failed to login!</strong> user does not exists.
+                                                 </div>";
+                                            break;
+                                    }
+                                }
+
+                            ?>
+                            <form action="" method="POST">
                                 <label for="username" class="form-item">Username</label>
                                 <input type="text" name="username" id="username" class="form-control form-item" required>
                                 <label for="password" class="form-item">Password</label>

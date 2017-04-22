@@ -46,7 +46,7 @@
         $sql .= "VALUES('{$db_username}','{$db_password}','{$db_country}','{$db_role}',NOW(),NOW())";
         $result = query($sql);
         confirm($result);
-        redirect("register.php?status=success");
+        redirect("index.php?status=success");
     }
 
     function isExistingUser($username){
@@ -88,10 +88,6 @@
             <a class="nav-link" href="#">Register</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-        </form>
       </div>
     </nav>
 
