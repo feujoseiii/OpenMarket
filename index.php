@@ -146,6 +146,7 @@
 
             <div class="exporter-stats">
                 <div class="container">
+                    <h4>Exporter dashboard</h4>
                     <div class="row">
                         <div class="col-md-3">
                             <div class="card">
@@ -191,6 +192,7 @@
                     <div class="exporter-stat-tables">
                         <div class="row">
                             <div class="col-md-6">
+                                <h4>My products</h4>
                                 <div class="card">
                                     <div class="card-block">
                                         <table class="table">
@@ -227,6 +229,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <h4>Recent message</h4>
                                 <div class="card">
                                     <div class="card-block">
                                         <table class="table">
@@ -265,7 +268,35 @@
                         </div>
                     </div>
                     <div class="export-suggestions">
-
+                        <div class="row" id="looking-for-title">
+                            <h4>People around the globe are looking for</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card looking-for-card">
+                                    <div class="card-block">
+                                        <h5 class="card-title"><i class="ion-ios-person"></i> Jose S. (<i class="ion-android-star-outline"></i> 123 Reviews)</h5>
+                                        <p>
+                                            <i class="ion-search"></i> Looking for: Fidget cube<br>
+                                            <i class="ion-earth"></i> Country: Philippines<br>
+                                            <i class="ion-radio-waves"></i> Language Spoken: English, Tagalog
+                                        </p>
+                                    </div>
+                                    <div style="margin-bottom: 10px; color: #fff;">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <a class="btn btn-primary btn-block"><i class="ion-eye"></i> Add to watchlist</a>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <a class="btn btn-primary btn-block"><i class="ion-paper-airplane"></i> Send a message</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
