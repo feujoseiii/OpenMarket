@@ -1,3 +1,14 @@
+<?php
+    require "helper/helper.php";
+    ob_start();
+    session_start();
+
+
+    function isAuth(){
+        return isset($_SESSION['username']) && isset($_SESSION['role']) ? true : false;
+    }
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,16 +33,56 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="index.php">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Register</a>
-            </li>
+            <?php if(isAuth()){ ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Browse</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">Logout</a>
+                </li>
+            <?php }else{ ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="login/">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="register/">Register</a>
+                </li>
+            <?php } ?>
         </ul>
     </div>
+
 </nav>
+
+<?php if(!isAuth()){ ?>
+    <section id="welcome">
+
+    </section>
+<?php } ?>
+
+
+<?php if(isset($_SESSION['role'])){ ?>
+
+    // if the user is exporter, display opportunities for exporter
+    <?php if($_SESSION['role']== 'exporter'){ ?>
+        <section id="exporter-listings">
+
+        </section>
+    <?php } ?>
+
+    // if the user is importer, display opportunities for importer
+    <?php if($_SESSION['role'] == 'importer'){ ?>
+        <section id="importer-listing">
+
+        </section>
+    <?php } ?>
+
+<?php } ?>
+
+
+
+
+
 </body>
 </html>
