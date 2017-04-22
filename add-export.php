@@ -6,7 +6,17 @@
 
 
 
-
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $title = clean($_POST['title']);
+        $description = clean($_POST['description']);
+        $price = clean($_POST['price']);
+        $tags = isset($_POST['tags']) ? clean($_POST['tags']) : "";
+        $sql  = "INSERT INTO exporter_products(title,description,price,tags,created_at,updated_at,username) ";
+        $sql .= "VALUES('{$title}','{$description}',{$price},'{$tags}',NOW(),NOW(),'{$_SESSION['username']}')";
+        $result = query($sql);
+        confirm($result);
+        redirect("add-export.php?status=success");
+    }
 
     function isAuth(){
         return isset($_SESSION['username']) && isset($_SESSION['role']) ? true : false;
@@ -73,13 +83,22 @@
                         <div class="card">
                             <div class="card-block">
                                 <div class="card-title"><h4><i class="ion-plus-round"></i> Add item to export</h4></div>
-                                <form action="">
+                                <?php
+                                if(isset($_GET['status'])){
+                                    if($_GET['status']=='success'){
+                                        echo "<div class=\"alert alert-success\">
+                                              <strong>Success! your item has been added!</strong>
+                                            </div>";
+                                    }
+                                }
+                                ?>
+                                <form action="" method="post">
                                     <label for="title">What would you like to export?</label>
                                     <input type="text" name="title" id="title" class="form-control" required>
                                     <label for="description" >Describe the product you want to export</label>
-                                    <textarea for="description" rows="10" class="form-control"></textarea>
+                                    <textarea name="description" id="description" rows="10" class="form-control" required></textarea>
                                     <label for="price">Price per piece (USD)</label>
-                                    <input type="text" name="price" class="form-control">
+                                    <input type="text" name="price" class="form-control" required>
                                     <label for="tags">Tags (Separated by comma)</label>
                                     <input type="text" name="tags" class="form-control"><br>
                                     <button type="submit" class="btn btn-primary btn-block">Add item</button>

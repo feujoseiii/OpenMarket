@@ -4,6 +4,10 @@
     margin: 0;
 }
 
+.card {
+    border-radius: 0;
+}
+
 .hero-image {
     height: 70vh;
     width: 100%;
@@ -59,3 +63,14 @@
 .add-export {
     margin: 20px 0;
 }
+
+/*Exporter stats*/
+
+.exporter-stats {
+    margin: 20px 0;
+}
+
+.exporter-stat-tables{
+    margin: 20px 0;
+}
+
