@@ -102,7 +102,7 @@
                             <div class=" exporter-no-item-greet">
                                 <h2><i class="ion-ios-sunny-outline"> </i>Good day, <?php echo $_SESSION['username'] ?>!</h2>
                                 <p>Make your products visible to the world!<br>Click the button below to list your product on OpenMarket</p>
-                                <a href="#" class="btn btn-primary"><i class="ion-plus-round"></i> Add items to export</a>
+                                <a href="add-export.php" class="btn btn-primary"><i class="ion-plus-round"></i> Add items to export</a>
                             </div>
                         </div>
                     </div>
@@ -124,43 +124,17 @@
                                         <i class="ion-radio-waves"></i> Language Spoken: English, Tagalog
                                     </p>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card looking-for-card">
-                                <div class="card-block">
-                                    <h5 class="card-title"><i class="ion-ios-person"></i> Jose S. (<i class="ion-android-star-outline"></i> 123 Reviews)</h5>
-                                    <p>
-                                        <i class="ion-search"></i> Looking for: Fidget cube<br>
-                                        <i class="ion-earth"></i> Country: Philippines<br>
-                                        <i class="ion-radio-waves"></i> Language Spoken: English, Tagalog
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card looking-for-card">
-                                <div class="card-block">
-                                    <h5 class="card-title"><i class="ion-ios-person"></i> Jose S. (<i class="ion-android-star-outline"></i> 123 Reviews)</h5>
-                                    <p>
-                                        <i class="ion-search"></i> Looking for: Fidget cube<br>
-                                        <i class="ion-earth"></i> Country: Philippines<br>
-                                        <i class="ion-radio-waves"></i> Language Spoken: English, Tagalog
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card looking-for-card">
-                                <div class="card-block">
-                                    <h5 class="card-title"><i class="ion-ios-person"></i> Jose S. (<i class="ion-android-star-outline"></i> 123 Reviews)</h5>
-                                    <p>
-                                        <i class="ion-search"></i> Looking for: Fidget cube<br>
-                                        <i class="ion-earth"></i> Country: Philippines<br>
-                                        <i class="ion-radio-waves"></i> Language Spoken: English, Tagalog
-                                    </p>
+                                <div style="margin-bottom: 10px; color: #fff;">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <a class="btn btn-primary btn-block"><i class="ion-eye"></i> Add to watchlist</a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a class="btn btn-primary btn-block"><i class="ion-paper-airplane"></i> Send a message</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
