@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>OpenMarket - Login</title>
+    <title>OpenMarket - Register</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
@@ -35,19 +35,21 @@
       </div>
     </nav>
 
-    <div class="login">
+    <div class="register">
         <div class="container">
             <div class="col-md-6 offset-md-3">
                 <div class="card">
                     <div class="card-block">
-                        <h4 class="card-title">OpenMarket Login</h4>
+                        <h4 class="card-title">OpenMarket Registration</h4>
                         <div class="login-forms">
                             <form action="" >
-                                <label for="username" class="form-item">Username</label>
+                                <label for="username" class="form-item">Preferred Username</label>
                                 <input type="text" name="username" id="username" class="form-control form-item" required>
-                                <label for="password" class="form-item">Password</label>
+                                <label for="password" class="form-item">Preferred Password</label>
                                 <input type="password" name="password" id="password" class="form-control" required>
-                                <button type="submit" class="btn btn-primary btn-block form-item">Login</button>
+                                <label for="repassword" class="form-item">Retype Password</label>
+                                <input type="password" name="repassword" id="repassword" class="form-control" required>
+                                <button type="submit" class="btn btn-primary btn-block form-item">Register</button>
                             </form>
                         </div>
                     </div>
