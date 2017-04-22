@@ -1,3 +1,45 @@
+<?php
+    require "../helper/helper.php";
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $errors = [];
+        $username = sanitize($_POST['username']);
+        $password = sanitize($_POST['password']);
+        $repassword = sanitize($_POST['repassword']);
+        $role = sanitize($_POST['role']);
+
+        if(isExistingUser($username)){
+            $errors = "Username is already taken.";
+        }
+
+        if($password != $repassword){
+            $errors = "Password does not match.";
+        }
+
+        if(!empty($errors)){
+            foreach($errors as $error){
+                echo $error;
+            }
+        }else{
+            performLogin($username,$password,$role);
+        }
+
+
+    }
+
+    function performLogin($username,$password,$role){
+        $sql = "INSERT INTO users VALUES('{$username}','$password','$role',NOW(),NOW())";
+    }
+
+    function isExistingUser($username){
+        $sql = "SELECT username FROM users WHERE username='{$username}'";
+        $result = query($sql);
+        confirm($result);
+        return count_rows($result) == 0 ? true : false;
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,6 +91,11 @@
                                 <input type="password" name="password" id="password" class="form-control" required>
                                 <label for="repassword" class="form-item">Retype Password</label>
                                 <input type="password" name="repassword" id="repassword" class="form-control" required>
+                                <label for="role" class="form-item">I want to</label>
+                                <select class="form-control" id="role">
+                                    <option value="1">I want to export products</option>
+                                    <option value="2">I want to import products</option>
+                                </select>
                                 <button type="submit" class="btn btn-primary btn-block form-item">Register</button>
                             </form>
                         </div>
