@@ -1,41 +1,59 @@
 <?php
     require "../helper/helper.php";
 
+    $errors = [];
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $errors = [];
-        $username = sanitize($_POST['username']);
-        $password = sanitize($_POST['password']);
-        $repassword = sanitize($_POST['repassword']);
-        $role = sanitize($_POST['role']);
+        $username = clean($_POST['username']);
+        $password = clean($_POST['password']);
+        $repassword = clean($_POST['repassword']);
+        $country = clean($_POST['country']);
+        $role = clean($_POST['role']);
 
         if(isExistingUser($username)){
-            $errors = "Username is already taken.";
+            $errors[] = "Username is already taken.";
         }
 
         if($password != $repassword){
-            $errors = "Password does not match.";
+            $errors[] = "Password does not match.";
         }
 
-        if(!empty($errors)){
-            foreach($errors as $error){
-                echo $error;
-            }
-        }else{
-            performLogin($username,$password,$role);
+        if(empty($errors)){
+            performRegister($username,$password,$country,$role);
         }
 
 
     }
 
-    function performLogin($username,$password,$role){
-        $sql = "INSERT INTO users VALUES('{$username}','$password','$role',NOW(),NOW())";
+    function performRegister($username,$password,$country,$role){
+        $db_username = escape($username);
+        $db_password = escape($password);
+        $db_country = escape($country);
+        $db_role;
+
+        switch($role){
+            case 1:
+                $db_role = "exporter";
+                break;
+            case 2:
+                $db_role = "importer";
+                break;
+            default:
+                $db_role = "unknown";
+        }
+
+
+        $sql  = "INSERT INTO users(username,password,country,role,created_at,updated_at)";
+        $sql .= "VALUES('{$db_username}','{$db_password}','{$db_country}','{$db_role}',NOW(),NOW())";
+        $result = query($sql);
+        confirm($result);
+        redirect("register.php?status=success");
     }
 
     function isExistingUser($username){
         $sql = "SELECT username FROM users WHERE username='{$username}'";
         $result = query($sql);
         confirm($result);
-        return count_rows($result) == 0 ? true : false;
+        return count_rows($result) == 0 ? false : true;
     }
 
 ?>
@@ -84,15 +102,35 @@
                     <div class="card-block">
                         <h4 class="card-title">OpenMarket Registration</h4>
                         <div class="login-forms">
-                            <form action="" >
+                            <?php
+                                if(!empty($errors)){
+                                    echo "<div class='alert alert-danger'>
+                                        <strong>Signup failed!</strong>";
+                                    foreach($errors as $error){
+                                        echo "<br> * ".$error;
+                                    }
+                                    echo "</div>";
+                                }
+
+                                if(isset($_GET['status'])){
+                                    if($_GET['status']=='success'){
+                                        echo "<div class=\"alert alert-success\">
+                                              <strong>Success! you can now login!</strong>
+                                            </div>";
+                                    }
+                                }
+                            ?>
+                            <form action="" method="POST">
                                 <label for="username" class="form-item">Preferred Username</label>
                                 <input type="text" name="username" id="username" class="form-control form-item" required>
                                 <label for="password" class="form-item">Preferred Password</label>
                                 <input type="password" name="password" id="password" class="form-control" required>
                                 <label for="repassword" class="form-item">Retype Password</label>
                                 <input type="password" name="repassword" id="repassword" class="form-control" required>
+                                <label for="country">Country</label>
+                                <input type="text" name="country" id="country" class="form-control" required>
                                 <label for="role" class="form-item">I want to</label>
-                                <select class="form-control" id="role">
+                                <select class="form-control" id="role" name="role">
                                     <option value="1">I want to export products</option>
                                     <option value="2">I want to import products</option>
                                 </select>

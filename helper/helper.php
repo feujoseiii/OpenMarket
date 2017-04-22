@@ -16,10 +16,6 @@
     return htmlentities($string);
   }
 
-  //clean and escape function
-  function sanitize($string){
-    return clean(sanitize($string));
-  }
 
   function redirect($string){
     //redirect to new page
