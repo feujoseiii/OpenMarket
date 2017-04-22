@@ -7,6 +7,13 @@
     function isAuth(){
         return isset($_SESSION['username']) && isset($_SESSION['role']) ? true : false;
     }
+
+    function exporter_countListedProducts($username){
+        $db_username = clean(escape($username));
+        $sql = "SELECT id FROM exporter_products WHERE username = '{$db_username}'";
+        $result = query($sql);
+        return count_rows($result);
+    }
 ?>
 
 <!doctype html>
@@ -21,8 +28,8 @@
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="styles/style.css">
-
 </head>
 <body>
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -38,6 +45,12 @@
             <?php if(isAuth()){ ?>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Browse</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Messages</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php">Logout</a>
@@ -57,23 +70,113 @@
 
 <?php if(!isAuth()){ ?>
     <section id="welcome">
+        <div class="hero-image">
+            <div class="hero-text">
+                <h1>OpenMarket</h1><br>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br>when an unknown printer took a galley of type and scrambled it to make a type <br>specimen book.</p><br>
+                <a class="btn btn-primary">Learn more</a>   <a class="btn btn-primary">Get started</a>
+            </div>
+        </div>
+        <div class="welcome-feature">
+            <div class="welcome-feature-text">
 
+            </div>
+        </div>
     </section>
 <?php } ?>
 
 
 <?php if(isset($_SESSION['role'])){ ?>
 
-    // if the user is exporter, display opportunities for exporter
+    <!--  if the user is exporter, display opportunities for exporter -->
     <?php if($_SESSION['role']== 'exporter'){ ?>
-        <section id="exporter-listings">
+        <section id="exporter">
+
+            <!-- if the user doesn't have products to export -->
+            <?php if(exporter_countListedProducts($_SESSION['username']) == 0){ ?>
+
+            <div class="display-wants">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class=" exporter-no-item-greet">
+                                <h2><i class="ion-ios-sunny-outline"> </i>Good day, <?php echo $_SESSION['username'] ?>!</h2>
+                                <p>Make your products visible to the world!<br>Click the button below to list your product on OpenMarket</p>
+                                <a href="#" class="btn btn-primary"><i class="ion-plus-round"></i> Add items to export</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="display-wants-by-country">
+                <div class="container">
+                    <div class="row" id="looking-for-title">
+                        <h4>People around the globe are looking for</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card looking-for-card">
+                                <div class="card-block">
+                                    <h5 class="card-title"><i class="ion-ios-person"></i> Jose S. (<i class="ion-android-star-outline"></i> 123 Reviews)</h5>
+                                    <p>
+                                        <i class="ion-search"></i> Looking for: Fidget cube<br>
+                                        <i class="ion-earth"></i> Country: Philippines<br>
+                                        <i class="ion-radio-waves"></i> Language Spoken: English, Tagalog
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card looking-for-card">
+                                <div class="card-block">
+                                    <h5 class="card-title"><i class="ion-ios-person"></i> Jose S. (<i class="ion-android-star-outline"></i> 123 Reviews)</h5>
+                                    <p>
+                                        <i class="ion-search"></i> Looking for: Fidget cube<br>
+                                        <i class="ion-earth"></i> Country: Philippines<br>
+                                        <i class="ion-radio-waves"></i> Language Spoken: English, Tagalog
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card looking-for-card">
+                                <div class="card-block">
+                                    <h5 class="card-title"><i class="ion-ios-person"></i> Jose S. (<i class="ion-android-star-outline"></i> 123 Reviews)</h5>
+                                    <p>
+                                        <i class="ion-search"></i> Looking for: Fidget cube<br>
+                                        <i class="ion-earth"></i> Country: Philippines<br>
+                                        <i class="ion-radio-waves"></i> Language Spoken: English, Tagalog
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card looking-for-card">
+                                <div class="card-block">
+                                    <h5 class="card-title"><i class="ion-ios-person"></i> Jose S. (<i class="ion-android-star-outline"></i> 123 Reviews)</h5>
+                                    <p>
+                                        <i class="ion-search"></i> Looking for: Fidget cube<br>
+                                        <i class="ion-earth"></i> Country: Philippines<br>
+                                        <i class="ion-radio-waves"></i> Language Spoken: English, Tagalog
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <?php } ?>
+
 
         </section>
     <?php } ?>
 
-    // if the user is importer, display opportunities for importer
+    <!--  if the user is importer, display opportunities for importer -->
     <?php if($_SESSION['role'] == 'importer'){ ?>
-        <section id="importer-listing">
+        <section id="importer">
 
         </section>
     <?php } ?>

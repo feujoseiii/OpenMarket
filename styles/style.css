@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.hero-image {
+    height: 70vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/hero-image.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.hero-text {
+    position: absolute;
+    width: 1140px;
+    color: #fff;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.welcome-feature {
+    width: 100%;
+    background-color: #2980b9;
+    height: 100px;
+}
+
+
+.display-wants{
+    height: auto;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/hero-image.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+.exporter-no-item-greet {
+    color: #fff;
+    padding: 50px 0;
+}
+
+.display-wants-by-country{
+    width: 100%;
+}
+
+#looking-for-title {
+    margin: 20px 0px;
+}
+
+.looking-for-card {
+    margin: 10px 0;
+}
